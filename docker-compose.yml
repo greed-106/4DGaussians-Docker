@@ -1,0 +1,25 @@
+services:
+  wu-4dgs:
+    image: wu-4dgs:latest
+    container_name: wu-4dgs
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, compute, utility]
+    volumes:
+      - /home/ymj/code/datasets:/workspace/datasets:rw
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    tty: true
+    stdin_open: true
+    command: tail -f /dev/null
+    restart: unless-stopped
+
+    # ========== 关键新增配置 ==========
+    shm_size: '16gb'  # 或 '4gb', '16gb'，根据你的物理内存调整
+    # ==================================

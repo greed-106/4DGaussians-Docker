@@ -9,3 +9,5 @@ plyfile
 pytorch_msssim
 open3d
 imageio[ffmpeg]
+opencv-python<4.9.0
+numpy<2.0
